@@ -1,0 +1,52 @@
+resources:
+  repositories:
+    - repository: self
+      type: git
+      ref: refs/heads/dev
+jobs:
+  - job: Fr4nc3
+    displayName: Build Server and Deploy
+    pool:
+      vmImage: ubuntu-18.04
+    steps:
+      - checkout: self
+      - task: NodeTool@0
+        displayName: Use Node 12.x
+        inputs:
+          versionSpec: 12.x
+      - task: UsePythonVersion@0
+        displayName: Use Python 3.8
+        inputs:
+          versionSpec: 3.8
+      - task: Npm@1
+        displayName: npm install
+        inputs:
+          verbose: false
+      - task: AWSShellScript@1
+        displayName: install serverless
+        inputs:
+          awsCredentials: {{ cookiecutter.pipeline_credentials }}
+          regionName: us-east-1
+          scriptType: inline
+          inlineScript: >-
+            # You can write your script inline here
+
+            npm install -g serverless
+      - task: AWSShellScript@1
+        displayName: install pipenv
+        inputs:
+          awsCredentials: {{ cookiecutter.pipeline_credentials }}
+          regionName: us-east-1
+          scriptType: inline
+          inlineScript: >-
+            pip install pipenv &&  pipenv install --python 3.8
+      - task: DockerInstaller@0
+        displayName: "Install Docker "
+      - task: AWSShellScript@1
+        displayName: Serverless deployment
+        inputs:
+          awsCredentials: {{ cookiecutter.pipeline_credentials }}
+          regionName: us-east-1
+          scriptType: inline
+          inlineScript: >-
+            npx serverless deploy

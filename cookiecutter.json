@@ -1,0 +1,31 @@
+{
+    "full_name": "Fr4nc3",
+    "email": "Your address email (eg. francia@fr4nc3.com)",
+    "github_username": "Your github username",
+    "project_name": "Name of the project",
+    "project_slug": "{{ cookiecutter.project_name.lower().replace('cookiecutter', '').strip().replace(' ', '-') }}",
+    "project_short_description": "A short description of the project",
+    "python_version": [
+        "3.8",
+        "3.9",
+        "3.10"
+    ],
+    "pipeline_credentials": "write credentials id",
+    "release_date": "{% now 'local' %}",
+    "install_fr4nc3_ds_utils": "yes",
+    "install_pandas": "yes",
+    "install_numpy": "yes",
+    "install_s3transfer": "yes",
+    "install_clickhouse_driver": "yes",
+    "endpoint_path": "/api/v1/",
+    "endpoint_method": "POST",
+    "version": "0.1.0",
+    "copy_hooks": "no",
+    "_extensions": [
+        "jinja2_time.TimeExtension"
+    ],
+    "_copy_without_render": [
+        "cookiecutter.json",
+        "{{cookiecutter.project_slug}}"
+    ]
+}

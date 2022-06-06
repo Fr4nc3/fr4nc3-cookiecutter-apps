@@ -1,0 +1,8 @@
+mamba==0.8.6
+expects==0.8.0
+testfixtures==4.10.0
+cookiecutter==1.6.0
+flake8==3.5.0
+pytest==3.3.2
+pytest-cookies==0.3.0
+attrs==19.1.0

@@ -1,0 +1,20 @@
+service: {{ cookiecutter.project_slug }}
+frameworkVersion: "2 || 3"
+
+provider:
+  name: aws
+  runtime: python{{ cookiecutter.python_version }}
+  lambdaHashingVersion: 20201221
+  stage: dev
+  region: us-east-1
+  environment:
+    SERVICE_NAME: ${self:service}
+
+functions:
+ {{ cookiecutter.project_slug }}:
+    handler: "{{ cookiecutter.project_slug }}/handler.lambda_handler"
+    events:
+      - httpApi: "{{ cookiecutter.endpoint_method }} {{cookiecutter.endpoint_path}}"
+
+plugins:
+  - serverless-python-requirements

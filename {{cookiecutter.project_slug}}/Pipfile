@@ -1,0 +1,37 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+
+[packages]
+awscli = "*"
+flake8 = "*"
+boto3= "*"
+botocore="*"
+datetime="*"
+jmespath=="*"
+python-dateutil="*"
+pytz="*"
+s3transfer="*"
+tzlocal="*"
+urllib3="*"
+{%- if cookiecutter.install_fr4nc3_ds_utils|lower == 'yes' %}
+fr4nc3-ds-utils = {editable = true,git = "fr4nc3/ds-utils"}
+{%- endif %}
+{%- if cookiecutter.install_pandas|lower == 'yes' %}
+pandas = "*"
+{%- endif %}
+{%- if cookiecutter.install_numpy|lower == 'yes' %}
+numpy = "*"
+{%- endif %}
+{%- if cookiecutter.install_clickhouse_driver|lower == 'yes' %}
+clickhouse-driver = "*"
+{%- endif %}
+
+
+[requires]
+python_version = "{{ cookiecutter.python_version }}"
